@@ -8,11 +8,10 @@
 #include <DefaultComponentsRegistry.h>
 #include <DefaultTurboModuleManagerDelegate.h>
 #include <FBReactNativeSpec.h>
-#include <ReactCommon/SampleTurboModuleJSIBindings.h>
-#include <ReactCommon/SampleTurboModuleSpec.h>
+#include <NativeSampleModule.h>
 #include <fbjni/fbjni.h>
 #include <react/renderer/componentregistry/ComponentDescriptorProviderRegistry.h>
-#include "NativeSampleModule.h"
+#include <autolinking.h>
 
 #ifdef REACT_NATIVE_APP_CODEGEN_HEADER
 #include REACT_NATIVE_APP_CODEGEN_HEADER
@@ -36,18 +35,15 @@ std::shared_ptr<TurboModule> cxxModuleProvider(
   if (name == NativeSampleModule::kModuleName) {
     return std::make_shared<NativeSampleModule>(jsInvoker);
   }
-  return autolinking_cxxModuleProvider(name, jsInvoker);;
+  return autolinking_cxxModuleProvider(name, jsInvoker);
 }
 
 std::shared_ptr<TurboModule> javaModuleProvider(
     const std::string& name,
     const JavaTurboModule::InitParams& params) {
-  auto module = SampleTurboModuleSpec_ModuleProvider(name, params);
-  if (module != nullptr) {
-    return module;
-  };
+
 #ifdef REACT_NATIVE_APP_MODULE_PROVIDER
-  module = REACT_NATIVE_APP_MODULE_PROVIDER(name, params);
+  auto module = REACT_NATIVE_APP_MODULE_PROVIDER(name, params);
   if (module != nullptr) {
     return module;
   }
@@ -72,6 +68,6 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* /*unused*/) {
     facebook::react::DefaultComponentsRegistry::
         registerComponentDescriptorsFromEntryPoint =
             &facebook::react::registerComponents;
-    facebook::react::SampleTurboModuleJSIBindings::registerNatives();
+//    facebook::react::SampleTurboModuleJSIBindings::registerNatives();
   });
 }
