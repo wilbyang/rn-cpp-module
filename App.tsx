@@ -12,13 +12,17 @@ import {
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 import SampleTurboModule from './specs/NativeSampleModule';
+import WebPExample from './WebPExample';
+
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
     <SafeAreaProvider>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
+      {/* Switch between examples */}
+      <WebPExample />
+      {/* <AppContent /> */}
     </SafeAreaProvider>
   );
 }
