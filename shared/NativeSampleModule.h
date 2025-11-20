@@ -1,6 +1,6 @@
 #pragma once
 
-#include <AppSpecsJSI.h>
+#include <AppNativeSpecsJSI.h>
 
 #include <memory>
 #include <string>

@@ -16,7 +16,7 @@
     "react-native-safe-area-context": "^5.5.2"
   },
   "codegenConfig": {
-    "name": "AppSpecs",
+    "name": "AppNativeSpecs",
     "type": "modules",
     "jsSrcsDir": "specs",
     "android": {
